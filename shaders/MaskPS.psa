@@ -1,0 +1,38 @@
+//
+//
+// Parameters:
+//
+//   sampler2D Image;
+//   sampler2D Mask;
+//   float4 texCoordCheck;
+//
+//
+// Registers:
+//
+//   Name          Reg   Size
+//   ------------- ----- ----
+//   texCoordCheck c14      1
+//   Image         s0       1
+//   Mask          s1       1
+//
+
+    ps_2_0
+    def c0, 0, 0, 0, 0
+    dcl t0.xy
+    dcl t1.xy
+    dcl v0
+    dcl_2d s0
+    dcl_2d s1
+    texld r0, t1, s1
+    texld r1, t0, s0
+    mul r0, r0.w, r1
+    mul r0, r0, v0
+    add r1.x, t1.x, -c14.x
+    cmp r0, r1.x, r0, c0.x
+    add r1.x, -t1.x, c14.y
+    cmp r0, r1.x, r0, c0.x
+    add r1.x, t1.y, -c14.z
+    cmp r0, r1.x, r0, c0.x
+    add r1.x, -t1.y, c14.w
+    cmp r0, r1.x, r0, c0.x
+    mov oC0, r0

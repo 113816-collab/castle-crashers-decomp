@@ -1,0 +1,22 @@
+//
+// Parameters:
+//
+//   sampler2D Image;
+//
+//
+// Registers:
+//
+//   Name         Reg   Size
+//   ------------ ----- ----
+//   Image        s0       1
+//
+
+    ps_2_0
+    def c0, 1, 0, 0, 0
+    dcl t0.xy
+    dcl v0
+    dcl_2d s0
+    texld r0, t0, s0
+    mov r0.w, c0.x
+    mul r0, r0, v0
+    mov oC0, r0

@@ -1,0 +1,35 @@
+//
+// Parameters:
+//
+//   sampler2D Image;
+//   float timer;
+//
+//
+// Registers:
+//
+//   Name         Reg   Size
+//   ------------ ----- ----
+//   timer        c13      1
+//   Image        s0       1
+//
+
+    ps_2_0
+    def c0, 0.0500000007, 11.1408463, 0.5, 0.00249999994
+    def c1, 6.28318548, -3.14159274, 0, 0
+    def c2, -1.55009923e-006, -2.17013894e-005, 0.00260416674, 0.00026041668
+    def c3, -0.020833334, -0.125, 1, 0.5
+    dcl t0.xy
+    dcl v0
+    dcl_2d s0
+    add r0.w, t0.y, t0.y
+    mov r0.x, c0.x
+    mad r0.x, c13.x, r0.x, r0.w
+    mad r0.x, r0.x, c0.y, c0.z
+    frc r0.x, r0.x
+    mad r0.x, r0.x, c1.x, c1.y
+    sincos r1.y, r0.x, c2, c3
+    mad r0.x, r1.y, c0.w, t0.x
+    mov r0.y, t0.y
+    texld r0, r0, s0
+    mul r0, r0, v0
+    mov oC0, r0

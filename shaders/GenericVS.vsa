@@ -1,0 +1,23 @@
+//
+// Parameters:
+//
+//   float4x4 matWVP;
+//
+//
+// Registers:
+//
+//   Name         Reg   Size
+//   ------------ ----- ----
+//   matWVP       c0       4
+//
+
+    vs_2_0
+    dcl_position v0
+    dcl_texcoord v1
+    dcl_color v2
+    mul r0, v0.y, c1
+    mad r0, c0, v0.x, r0
+    mad r0, c2, v0.z, r0
+    mad oPos, c3, v0.w, r0
+    mov oT0.xy, v1
+    mov oD0, v2
